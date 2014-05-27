@@ -15,9 +15,8 @@ typedef struct Fics
 /***************************** 
  * initialisation *
  *****************************/
-
-//rempli le tableau avec la probabilité d'apparition de chaque caractère
-Fichier * initialisation(char * nom_fichier);
+Fichier * creer_fichier();
+Void initialisation(Fichier fichier);
 
 /******************************************
  *    *

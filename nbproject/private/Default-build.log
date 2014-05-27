@@ -1,0 +1,3 @@
+gcc -g -Wall -Iinclude    -c -o source/main.o source/main.c
+gcc -g -Wall -Iinclude    -c -o source/arbre.o source/arbre.c
+gcc source/main.o source/arbre.o  -o main
