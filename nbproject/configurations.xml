@@ -7,15 +7,25 @@
         <in>main.c</in>
       </df>
     </df>
+    <df root="." name="1">
+    </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>makefile</itemPath>
     </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>makefile</itemPath>
+    </logicalFolder>
+    <itemPath>test1.txt</itemPath>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
+    <Elem>.</Elem>
     <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>makefile</projectmakefile>
@@ -45,9 +55,20 @@
           </cTool>
         </makeTool>
       </makefileType>
+      <item path="include/package-merge.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="include/tab_longueur.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="source/arbre.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="source/main.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/package-merge.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="source/tab_longueur.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="test1.txt" ex="false" tool="3" flavor2="0">
+
       </item>
     </conf>
   </confs>

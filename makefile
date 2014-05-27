@@ -1,6 +1,6 @@
 CC=gcc
 EXEC=main
-SRCS=source/main.c source/arbre.c
+SRCS=source/main.c source/mtf.c
 OBJS=$(SRCS:.c=.o) 
 CFLAGS= -g -Wall -Iinclude 
 

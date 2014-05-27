@@ -18,6 +18,13 @@
         <in>tab_huff.c</in>
       </df>
     </df>
+    <df root="." name="1">
+      <df name="include">
+      </df>
+      <df name="source">
+      </df>
+    </df>
+    <itemPath>test1.txt</itemPath>
   </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
   <confs>
