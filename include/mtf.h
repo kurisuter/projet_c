@@ -21,10 +21,10 @@ void intervertir(int i,int j);
 void avancer_i(int i);
 
 //recherche un entier dans le tableau et le renvoie
-int rechercher_elem(int e);
+int rechercher_elem(unsigned int e);
 
 //recherche un entier dans le tableau et renvoie son indice
-int rechercher_indice(int e);
+int rechercher_indice(unsigned int e);
 
 //encodage mtf
 FILE * mtf(FILE * f);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "mtf.h"
 
-void initialisation_tab_mtf(int tab[])
+void initialisation_tab_mtf()
 {
     int i;
     for(i=0;i<256;i++)
@@ -14,11 +14,10 @@ void initialisation_tab_mtf(int tab[])
 FILE * mtf(FILE * f)
 {
     FILE * nf;
-    int tab[256];
-    int c,i,symbole;
-    initialisation_tab_mtf(tab);
-    i=0;
+    int c,symbole;
+    initialisation_tab_mtf();
     nf =fopen("nouveau_fichier.txt", "w+");
+            fputc('X',nf);
     if (nf != NULL)
     {
         while ((c=fgetc(f)) != EOF)
@@ -26,11 +25,10 @@ FILE * mtf(FILE * f)
             printf(" c avant :%d ",c );
             symbole = c &255;
             printf("symbole : %d ",symbole);
-            c = rechercher_indice(tab,symbole);
+            c = rechercher_indice(symbole);
             printf("c apres : %d\n",c);
             fputc(c,nf);
-            avancer_i(tab,c);
-            i++;
+            avancer_i(c);
         }
         fclose(nf);
     }
@@ -44,10 +42,8 @@ FILE * mtf(FILE * f)
 FILE * mtf_r(FILE * f)
 {
     FILE * nf;
-    int tab[256];
-    int c,i,symbole;
+    int c,symbole;
     initialisation_tab_mtf(tab);
-    i=0;
     nf =fopen("mtf_decode.txt", "w+");
     printf("\n DECODAGE \n");
     if (nf != NULL)
@@ -58,11 +54,10 @@ FILE * mtf_r(FILE * f)
             printf(" c avant :%d ",c );
             symbole = c &255;
             printf("symbole : %d ",symbole);
-            c = rechercher_elem(tab,symbole);
+            c = rechercher_elem(symbole);
             printf(" c après :%d \n",c );
             fputc(c,nf);
-            avancer_i(tab,c);
-            i++;
+            avancer_i(c);
         }
         fclose(nf);
     }
@@ -74,7 +69,7 @@ FILE * mtf_r(FILE * f)
     
 }
 //interverti les donnée aux indices i et j
-void intervertir(int tab[],int i,int j)
+void intervertir(int i,int j)
 {
     int temp;
     temp = tab[i];
@@ -83,24 +78,23 @@ void intervertir(int tab[],int i,int j)
 }
 
 //met l'entier à l'indice i en première place et décale les entiers d'indice 0 à i-1
-void avancer_i(int tab[],int i)
+void avancer_i(int i)
 {
-    int temp,j;
-    temp = tab[0];
+    int j;
     for(j=i;j>=1;j--)
     {
-        intervertir(tab,j,j-1);
+        intervertir(j,j-1);
     }
 }
 
 //recherche un entier dans le tableau et le renvoie
-int rechercher_elem(int tab[],int e)
+int rechercher_elem(unsigned int e)
 {
     return tab[e];
 }
 
 //recherche un entier dans le tableau et renvoie son indice
-int rechercher_indice(int tab[],int e)
+int rechercher_indice(unsigned int e)
 {
     int i =0;
     while((i<256) && (tab[i]!=e))
