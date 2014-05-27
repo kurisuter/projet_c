@@ -1,0 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Struct_code struct_code;
+typedef struct Struct_code
+{
+	char lettre;// le prof a dit qu'on compresse une liste d'octets quel que soit le fichier ... c'est à dire 
+	float proba;
+	int * codage;
+	int longueur;
+}struct_code;
+
+typedef struct_code * tab_huff;
