@@ -46,12 +46,8 @@
         </makeTool>
       </makefileType>
       <item path="source/arbre.c" ex="false" tool="0" flavor2="0">
-        <cTool flags="0">
-        </cTool>
       </item>
       <item path="source/main.c" ex="false" tool="0" flavor2="0">
-        <cTool flags="0">
-        </cTool>
       </item>
     </conf>
   </confs>

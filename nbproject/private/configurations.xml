@@ -5,6 +5,8 @@
       <df name="include">
         <in>arbre.h</in>
         <in>gestion_fichier.h</in>
+        <in>huffman.h</in>
+        <in>mtf.h</in>
         <in>tab_huff.h</in>
       </df>
       <df name="source">
@@ -12,6 +14,7 @@
         <in>gestion_fichier.c</in>
         <in>huffman.c</in>
         <in>main.c</in>
+        <in>mtf.c</in>
         <in>tab_huff.c</in>
       </df>
     </df>
