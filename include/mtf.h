@@ -10,7 +10,7 @@ void avancer_i(int tab[],int i);
 #ifndef MTF_H
 #define	MTF_H
 
-int tab[256];
+unsigned int tab[256];
 
 void initialisation_tab_mtf();
 
