@@ -10,7 +10,8 @@
 #include "arbre.h"
 
 typedef struct _listch liste_chainee;
-typedef struct _listch{
+typedef struct _listch
+{
 	Arbre * arbre;
 	struct _listch *suivant;
 	

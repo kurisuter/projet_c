@@ -2,27 +2,24 @@
 #define GESTION_FICHIER_H
 #include <stdio.h>
 #include <stdlib.h>
-#include "tab_huff.h"
-#include "arbre.h"
+#define Nmax 256
 
-typedef struct Fics Fichier;
-typedef struct Fics
-{
-	int nb_caracteres;
-	int tab_huff;
-}Fichier;
 
-/***************************** 
- * initialisation *
- *****************************/
-Fichier * creer_fichier();
-Void initialisation(Fichier fichier);
 
-/******************************************
- *    *
- ******************************************/
+
+
 void compression(  );
 void decompression(  );
+
+
+/* parcours du fichier en remplissant la table de frequence (table d'entier)*/
+int * parcours_fichier();
+
+/*Initilsation a 0 du tableau de frequence*/
+int *initialisation();
+
+/*Affichage du tableau */
+void affiche(int* tab);
 /*************
  * booléens  *
  *************/
@@ -37,6 +34,6 @@ void decompression(  );
  **********************/
 
 /*fonction de test du module */
-void test_();
+void test();
 
 #endif

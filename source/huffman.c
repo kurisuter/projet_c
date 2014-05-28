@@ -16,16 +16,19 @@ int indice_minimum(int tab_repetition[])
 }
 
 //renvoie la somme des éléments du tableau
-int somme_element(int tab_repetition[]){
+int somme_element(int tab_repetition[])
+{
     int i;
     int somme =0;
-    for(i=0;i<256;i++){
+    for(i=0;i<256;i++)
+    {
         somme+=tab_repetition[i];
     }
     return somme;
 }
 
-liste_chainee * ajouterElement(liste_chainee *liste, Arbre * a){
+liste_chainee * ajouterElement(liste_chainee *liste, Arbre * a)
+{
 	liste_chainee * temp;
 	temp = (liste_chainee *)malloc(sizeof(liste_chainee));
 	temp->arbre = a;
@@ -33,25 +36,33 @@ liste_chainee * ajouterElement(liste_chainee *liste, Arbre * a){
 	return temp;
 }
 
-liste_chainee * supprimerElement(liste_chainee * liste, Arbre * arbre){
+liste_chainee * supprimerElement(liste_chainee * liste, Arbre * arbre)
+{
 	liste_chainee * temp;
 	liste_chainee * elem_precedent;
 	int trouve = 0;
 	temp =liste;
 	elem_precedent= temp;
-	while((temp != NULL) && (trouve !=1) ){
-		if(temp->arbre == arbre){
+	while((temp != NULL) && (trouve !=1) )
+        {
+		if(temp->arbre == arbre)
+                {
 			trouve = 1;
-		}else{
+		}
+                else
+                {
 			elem_precedent = temp;
 			temp = temp->suivant;
 		}
 	}
-	if(trouve == 1){
-		if(elem_precedent == temp){
-			liste = temp->suivant;
-			
-		}else{
+	if(trouve == 1)
+        {
+		if(elem_precedent == temp)
+                {
+			liste = temp->suivant;	
+		}
+                else
+                {
 			elem_precedent->suivant = temp->suivant;
 		}
 	}
@@ -65,7 +76,8 @@ liste_chainee * tab_to_list(int tab_repetition[])
     Arbre * a;
     for(i=0;i<256;i++)
     {
-        if(tab_repetition[i] !=0){
+        if(tab_repetition[i] !=0)$
+        {
             a = ajouter_nouveau_parent(NULL,NULL,0,tab_repetition[i]);
             printf("proba = %d ",a->proba );
             liste =ajouterElement(liste,a);
@@ -76,14 +88,17 @@ liste_chainee * tab_to_list(int tab_repetition[])
 }
 
 //
-Arbre * recherche_mini(liste_chainee *liste){
+Arbre * recherche_mini(liste_chainee *liste)
+{
 	liste_chainee * temp;
 	Arbre * arbre;
 	temp=liste;
 	arbre = temp->arbre;
 	temp = temp->suivant;
-	while(temp != NULL){
-		if(temp->arbre->proba < arbre->proba){
+	while(temp != NULL)
+        {
+		if(temp->arbre->proba < arbre->proba)
+                {
 			arbre = temp->arbre;
 		}
 		temp = temp->suivant;
@@ -102,7 +117,8 @@ Arbre * creer_arbre_huffman(int tab_repetition[])
     
     liste = tab_to_list(tab_repetition);
     
-    while(liste->arbre->proba != taille_fichier){
+    while(liste->arbre->proba != taille_fichier)
+    {
         afficher(liste);
         a1 = recherche_mini(liste);
         liste = supprimerElement(liste, a1);
@@ -130,13 +146,18 @@ void remplir_tab_longueur(Arbre * a)
     }
 }*/
 
-void afficher(liste_chainee * liste){
+void afficher(liste_chainee * liste)
+{
 	liste_chainee *temp;
 	temp = liste;
-	while(temp != NULL){
-		if(temp->arbre !=NULL){
+	while(temp != NULL)
+        {
+		if(temp->arbre !=NULL)
+                {
 			printf(" %d ", temp->arbre->proba);
-		}else{
+		}
+                else
+                {
 			printf("\nELEMENT VIDE");		
 		}
 		temp = temp->suivant;
