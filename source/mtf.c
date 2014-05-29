@@ -4,29 +4,47 @@
 
 void initialisation_tab_mtf()
 {
-    int i;
+    unsigned int i;
     for(i=0;i<256;i++)
     {
         tab[i]=i;
     }
 }
+void affiche_tab()
+{
+    unsigned int i,j;
+    printf("\n");
+    for(i=0;i<256;i++)
+    {
+        printf("%c  ",i);
+        if((i%40)==0)
+        {
+            printf(".\n");
+            
+        for(j=i-40;j<i;j++){
+            printf("%c  ",tab[j]);
+            
+        }
+            printf("\n\n");
+        }
+        
+    }
+    
+    printf("\n SUIVANT \n");
+}
 
 FILE * mtf(FILE * f)
 {
     FILE * nf;
-    int c,symbole;
+    unsigned int c,symbole;
     initialisation_tab_mtf();
     nf =fopen("nouveau_fichier.txt", "w+");
-            fputc('X',nf);
     if (nf != NULL)
     {
         while ((c=fgetc(f)) != EOF)
         {
-            printf(" c avant :%d ",c );
             symbole = c &255;
-            printf("symbole : %d ",symbole);
             c = rechercher_indice(symbole);
-            printf("c apres : %d\n",c);
             fputc(c,nf);
             avancer_i(c);
         }
@@ -42,28 +60,23 @@ FILE * mtf(FILE * f)
 FILE * mtf_r(FILE * f)
 {
     FILE * nf;
-    int c,symbole;
+    unsigned int c,symbole;
     initialisation_tab_mtf(tab);
     nf =fopen("mtf_decode.txt", "w+");
-    printf("\n DECODAGE \n");
     if (nf != NULL)
     {
         while ((c=fgetc(f)) != EOF)
         {
-            
-            printf(" c avant :%d ",c );
             symbole = c &255;
-            printf("symbole : %d ",symbole);
-            c = rechercher_elem(symbole);
-            printf(" c après :%d \n",c );
+            c = tab[symbole];
             fputc(c,nf);
-            avancer_i(c);
+            avancer_i(symbole);
         }
         fclose(nf);
     }
     else
     {
-        printf("Impossible d'ouvrir le fichier nouveau_fichier.txt");
+        printf("Impossible d'ouvrir le fichier mtfdecode.txt");
     }
     return nf;
     
@@ -71,7 +84,7 @@ FILE * mtf_r(FILE * f)
 //interverti les donnée aux indices i et j
 void intervertir(int i,int j)
 {
-    int temp;
+    unsigned int temp;
     temp = tab[i];
     tab[i]=tab[j];
     tab[j]=temp;
@@ -88,7 +101,7 @@ void avancer_i(int i)
 }
 
 //recherche un entier dans le tableau et le renvoie
-int rechercher_elem(unsigned int e)
+unsigned int rechercher_elem(unsigned int e)
 {
     return tab[e];
 }
@@ -106,8 +119,7 @@ int rechercher_indice(unsigned int e)
 
 void test_mtf(){
     FILE * f;
-    FILE * code_mtf;
-    f = fopen("newfile.txt","r");
+    f = fopen("test1.txt","r");
     
     if (f != NULL)
     {

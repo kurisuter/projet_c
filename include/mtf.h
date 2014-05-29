@@ -12,6 +12,8 @@ void avancer_i(int tab[],int i);
 
 unsigned int tab[256];
 
+void affiche_tab();
+
 void initialisation_tab_mtf();
 
 //interverti les donnée aux indices i et j
@@ -21,7 +23,7 @@ void intervertir(int i,int j);
 void avancer_i(int i);
 
 //recherche un entier dans le tableau et le renvoie
-int rechercher_elem(unsigned int e);
+unsigned int rechercher_elem(unsigned int e);
 
 //recherche un entier dans le tableau et renvoie son indice
 int rechercher_indice(unsigned int e);
@@ -32,7 +34,7 @@ FILE * mtf(FILE * f);
 FILE * mtf_r(FILE * f);
 
 
-void test_mtf(char* nom);
+void test_mtf();
 
 #endif	/* MTF_H */
 
