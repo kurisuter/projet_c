@@ -2,35 +2,51 @@
 #include <stdlib.h>
 #include "mtf.h"
 
-void initialisation_tab_mtf(int tab[])
+void initialisation_tab_mtf()
 {
-    int i;
+    unsigned int i;
     for(i=0;i<256;i++)
     {
         tab[i]=i;
     }
 }
+void affiche_tab()
+{
+    unsigned int i,j;
+    printf("\n");
+    for(i=0;i<256;i++)
+    {
+        printf("%c  ",i);
+        if((i%40)==0)
+        {
+            printf(".\n");
+            
+        for(j=i-40;j<i;j++){
+            printf("%c  ",tab[j]);
+            
+        }
+            printf("\n\n");
+        }
+        
+    }
+    
+    printf("\n SUIVANT \n");
+}
 
 FILE * mtf(FILE * f)
 {
     FILE * nf;
-    int tab[256];
-    int c,i,symbole;
-    initialisation_tab_mtf(tab);
-    i=0;
+    unsigned int c,symbole;
+    initialisation_tab_mtf();
     nf =fopen("nouveau_fichier.txt", "w+");
     if (nf != NULL)
     {
         while ((c=fgetc(f)) != EOF)
         {
-            printf(" c avant :%d ",c );
             symbole = c &255;
-            printf("symbole : %d ",symbole);
-            c = rechercher_indice(tab,symbole);
-            printf("c apres : %d\n",c);
+            c = rechercher_indice(symbole);
             fputc(c,nf);
-            avancer_i(tab,c);
-            i++;
+            avancer_i(c);
         }
         fclose(nf);
     }
@@ -44,63 +60,54 @@ FILE * mtf(FILE * f)
 FILE * mtf_r(FILE * f)
 {
     FILE * nf;
-    int tab[256];
-    int c,i,symbole;
+    unsigned int c,symbole;
     initialisation_tab_mtf(tab);
-    i=0;
     nf =fopen("mtf_decode.txt", "w+");
-    printf("\n DECODAGE \n");
     if (nf != NULL)
     {
         while ((c=fgetc(f)) != EOF)
         {
-            
-            printf(" c avant :%d ",c );
             symbole = c &255;
-            printf("symbole : %d ",symbole);
-            c = rechercher_elem(tab,symbole);
-            printf(" c après :%d \n",c );
+            c = tab[symbole];
             fputc(c,nf);
-            avancer_i(tab,c);
-            i++;
+            avancer_i(symbole);
         }
         fclose(nf);
     }
     else
     {
-        printf("Impossible d'ouvrir le fichier nouveau_fichier.txt");
+        printf("Impossible d'ouvrir le fichier mtfdecode.txt");
     }
     return nf;
     
 }
 //interverti les donnée aux indices i et j
-void intervertir(int tab[],int i,int j)
+void intervertir(int i,int j)
 {
-    int temp;
+    unsigned int temp;
     temp = tab[i];
     tab[i]=tab[j];
     tab[j]=temp;
 }
 
 //met l'entier à l'indice i en première place et décale les entiers d'indice 0 à i-1
-void avancer_i(int tab[],int i)
+void avancer_i(int i)
 {
-    int temp,j;
-    temp = tab[0];
+    int j;
     for(j=i;j>=1;j--)
     {
-        intervertir(tab,j,j-1);
+        intervertir(j,j-1);
     }
 }
 
 //recherche un entier dans le tableau et le renvoie
-int rechercher_elem(int tab[],int e)
+unsigned int rechercher_elem(unsigned int e)
 {
     return tab[e];
 }
 
 //recherche un entier dans le tableau et renvoie son indice
-int rechercher_indice(int tab[],int e)
+int rechercher_indice(unsigned int e)
 {
     int i =0;
     while((i<256) && (tab[i]!=e))
@@ -112,8 +119,7 @@ int rechercher_indice(int tab[],int e)
 
 void test_mtf(){
     FILE * f;
-    FILE * code_mtf;
-    f = fopen("newfile.txt","r");
+    f = fopen("test1.txt","r");
     
     if (f != NULL)
     {
