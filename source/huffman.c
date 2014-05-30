@@ -133,18 +133,19 @@ Arbre * creer_arbre_huffman(int tab_repetition[])
     
     return liste->arbre;
 }
-/*
+
 void remplir_tab_longueur(Arbre * a)
 {
     int i;
-    if((a->fils_gauche ==NULL ) && (a->fils_droit ==NULL ))
-    {
-        
-    }else
-    {
-        
-    }
-}*/
+    longueur(a,0);
+    a = creerArbreCannonique();
+    recupererCode(Arbre *ac, tab_longueur *tl);
+}
+
+void arbre_decompression()
+{
+    
+}
 
 void afficher(liste_chainee * liste)
 {

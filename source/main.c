@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gestion_fichier.h"
-#include "mtf.h"
+#include <rle.h>
 
 
 
 
 int main()
 {
-	test_mtf("test1.txt");
-	return 0;
+    test_rle("test1.txt");
+    return 0;
 }

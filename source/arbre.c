@@ -4,6 +4,7 @@
 /***************************** 
  * initialisation de l'arbre *
  *****************************/
+/*permet de creer un arbre avec deux fils null et le symbole et la proba à 0*/
 Arbre * creer_arbre()
 {
 	Arbre * un_arbre ;
@@ -85,7 +86,8 @@ void affiche_arbre(Arbre * a)
 //affiche un octet de l'entier x en binaire
 void affiche_bin_octet(int x)
 {
-	for(int i =7 ; i>=0 ; i--)
+    int i;
+	for(i =7 ; i>=0 ; i--)
         {
 		printf("%d",( (x>>i) & 1));
 	}	
@@ -110,53 +112,46 @@ void longueur(Arbre * a, int h)
     }
 }
 
-
-/*fonction que remplis le champs "longeur" de la structure de tab_longeur à partir d'un arbre*/
-
-
-/*fonction qui permet de creer un arbre canonique à partir d'une table de longueur*/
-Arbre creerArbreCanonique()
+/*ajoute le bit b à droite dans la derniere case du tableau code et décale les bits dans les autres cases*/
+void ajoute_bit_code(unsigned long long int c[], int b)
 {
-    Arbre ac=creer_arbre();
-   // int LongueurMax=recuperer_longueurMax(tl);
-    return ac;
-}
+   int i;
 
-void traitement(int *c[], int b)
-{
-   
-    for(int i=3;i>0;i++)
+    for(i=3;i>0;i++)
     {
-        c[i]=(c[i]<<1)|(c[i-1]>>63);
+        c[i]=(c[i]<< 1)|(c[i-1]>>63);
     } 
     c[0]=(c[0]<<1)|b;
 }
 
-void code(Arbre * a, int c[], int h)
+/*fonction recursive utiliser dans recupererCode*/
+void code(Arbre * a, unsigned long long int c[], int h)
 { 
-   
+    int i;
     if(est_feuille(a))
     {
         ajouter_codage_tab(c, a->symbole);
     }
     else
     {
-        int cg[]=c;
-        int cd[]=c;
-        free(c);
-        traitement(&cd,0);
-        traitement(&cg,1);
-        code(a->fils_droit,cd);
-        code(a->fils_gauche,cg);
+        unsigned long long int cg[4];
+        for(i=0;i<3;i++)
+        {
+            cg[i]=c[i];
+        }
+        ajoute_bit_code(cg,0);
+        ajoute_bit_code(c,1);
+        code(a->fils_droit,c,h+1);
+        code(a->fils_gauche,cg,h+1);
     }
 }
 
 
 /*fonction qui parcours un arbre et inscrit le code correspondant à chaque symbole dans la table de longueur*/
-void recupererCode(Arbre *ac, tab_longueur *tl)
+void recupererCode(Arbre *ac)
 {
-    long c [4]={0,0,0,0};
-    code(ac,tl,c,0);
+    unsigned long long int c [4]={0,0,0,0};
+    code(ac,c,0);
 }
 /*fonction de test du module arbre*/
 void test_arbre()
@@ -167,7 +162,54 @@ void test_arbre()
 	b=creer_arbre();
 	a = ajouter_nouveau_parent(a,b,'5',0.02);
 	affiche_arbre(a);
-	affiche_arbre(get_fils_gauche(a));
+	affiche_arbre(a->fils_gauche);
 	
+}
+
+
+
+/**********************
+ * Arbre Canonique *
+ **********************/
+void ajouter_symbole(Arbre *a, int t, int num, int s)
+{
+    if(a==NULL)
+    {
+        a=creer_arbre();
+    }
+    if(t==0)
+    {
+        a->symbole=s;
+    }
+    else if(num>t)
+    {
+        ajouter_symbole(a->fils_gauche, (t/2), num, s);
+    }
+    else
+    {
+        ajouter_symbole(a->fils_droit, (t/2), num, s);
+    }
+}
+
+
+
+Arbre * creerArbreCanonique()
+{
+    int h=0;
+    int numElem;
+    int Hmax=get_lg_Max();
+    Arbre * ac=creer_arbre();
+    while(h<Hmax)
+    {
+        listInt elems=getSymbole(h);
+        numElem=1;
+        while(elems!=NULL)
+        {
+            ajouter_symbole(ac,(pow(2,(h-1))),numElem,elems->val);
+            elems=elems->nxt;
+            numElem++;
+        }
+    }
+    return ac;
 }
 

@@ -1,17 +1,8 @@
 #include "package-merge.h"
 
 
-cell * creer_cell(int p, int v)
-{
-    cell * c ;
-    c =(cell *) malloc(sizeof(cell));
-    c->poid=p;
-    c->val=creer_cell(v);
-    c->suivant=NULL;
-    return c;
-}
 
-cell * creer_cell(int p, listVal v)
+cell * creer_cell(int p, listInt v)
 {
     cell * c ;
     c =(cell *) malloc(sizeof(cell));
@@ -21,38 +12,7 @@ cell * creer_cell(int p, listVal v)
     return c;
 }
 
-void inserer_en_tete_val(int v, listVal lv)
-{
-    listVal lt=lv;
-    lv=creer_cell_val(v);
-    if(lt!=NULL)
-    {
-        lv->nxt=lt;
-    }
-}
-
-
-
-listVal fusion_deux_listes(listVal l1, listVal l2)
-{
-    listVal l3=NULL;
-    listVal l=l1;
-    while(l->nxt!=NULL)
-    {
-        inserer_en_tete_val(l->val, l3);
-    }
-    l=l2;
-     while(l->nxt!=NULL)
-    {
-        inserer_en_tete_val(l->val, l3);
-    }
-    
-}
-
-
-
-
-void inserer_par_poid(int p, listVal v, llist l)
+void inserer_par_poid(int p, listInt v, llist l)
 {
     llist lt=l;
     while(lt!= NULL && lt->suivant!=NULL && lt->suivant->poid<p)
@@ -71,14 +31,6 @@ void inserer_par_poid(int p, listVal v, llist l)
     }
     
 }
-void free_list_val(listVal lv)
-{
-    if(lv->nxt!=NULL)
-    {
-       free_list(lv->nxt);
-    }
-    free(lv);
-}
 
 
 void free_list(llist l)
@@ -87,7 +39,7 @@ void free_list(llist l)
     {
         free_list(l->suivant);
     }
-    free_list_val(l->val);
+    free_list_int(l->val);
     free(l);
 }
 
@@ -95,11 +47,12 @@ void free_list(llist l)
 int creer_list_from_tab(int tab_rep[], llist l)
 {
     int n=0;
-    for(int i=0;i<(int)sizeof(tab_rep);i++)
+    int i;
+    for(i=0;i<(int)sizeof(tab_rep);i++)
     {
         if(tab_rep[i]==0)
         {
-            inserer_par_poid(tab_rep[i],i,l);
+            inserer_par_poid(tab_rep[i],creer_list_int(i),l);
             ajouter_longueur(0, i);
         }
         ajouter_longueur(1, i);
@@ -143,9 +96,9 @@ void merge(llist elem, llist groupement)
         lg=lg->suivant;
     }
 }
-void incrementer_table_longueur(listVal lval)
+void incrementer_table_longueur(listInt lval)
 {
-    listVal lv=lval;
+    listInt lv=lval;
     while(lv!= NULL)
     {
         incrementer_longueur(lv->val);
@@ -159,7 +112,7 @@ Arbre *creer_arbrePM(int tab_rep[])
 {
     llist elems=NULL;
     llist le;
-    int n=creer_list_from_tab(tab_rep[], elems);
+    int n=creer_list_from_tab(tab_rep, elems);
     llist groupement=NULL;
     int p= package(elems, groupement);
     while(p<(n-2))
@@ -173,8 +126,14 @@ Arbre *creer_arbrePM(int tab_rep[])
     {
         incrementer_table_longueur(le->val);
     }
-    return(creerArbreCannonique());
+    return(creerArbreCanonique());
     
     
+    
+}
+
+void test_PM()
+{
+    Arbre * a;
     
 }
