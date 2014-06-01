@@ -67,3 +67,8 @@ int get_lg_Max()
     }
     return n;
 }
+
+unsigned long long int getCode(int i)
+{
+    return tab[i].codage;
+}

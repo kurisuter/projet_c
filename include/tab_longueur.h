@@ -33,5 +33,5 @@ listInt getSymbole(int lg);
 
 int get_lg_Max();
 
-
+unsigned long long int getCode(int i);
 #endif
