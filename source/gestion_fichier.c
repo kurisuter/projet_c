@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "gestion_fichier.h"
  #include "arbre.h"
+ #include "huffman.h"
 
 /***************************** 
  * initialisation *
@@ -8,14 +9,13 @@
 
 //rempli le tableau avec la probabilité d'apparition de chaque caractère
 
-int * parcours_fichier(char * nom)
+void parcours_fichier(char * nom, int Tfreq[])
 
 {   
     FILE * nf;
     nf =fopen(nom, "r");
     int c;
-    int *Tfreq;
-    Tfreq=initialisation();
+    initialisation(Tfreq);
     if (nf != NULL)
     {
        while ((c=fgetc(nf)) != EOF)
@@ -36,21 +36,17 @@ int * parcours_fichier(char * nom)
         printf("Impossible d'ouvrir le fichier");
     }
     
-
-    return Tfreq;}   
+}   
 
 
 /*Initilsation a 0 du tableau de frequence*/
-int *initialisation()
-{	int *tabl;
+void initialisation(int t[])
+{
 	int i; 
-	tabl = (int *)malloc(Nmax* sizeof(int));// allocation memoire pour le tableau
-	if (tabl==NULL){exit(EXIT_FAILURE);}
 	for (i = 0; i < Nmax; i ++)
 	{
-		tabl[i] = 0;
+		t[i] = 0;
 	}
-        return tabl;
 }
 
 // Pour en_tete du fichier (tableau de longueur)
@@ -82,22 +78,22 @@ void ecrire_en_tete(char* nom_avec)
     }
 }
 
-void ecrire_code(char * nom)
+void ecrire_code(char * nom,char * nom1)
 {
     FILE * f;
-    f =fopen(nom, "a+");
-    int i,x;
+    FILE * f1;
+    f =fopen(nom, "r");
+    f1 =fopen(nom1, "a+");
+    int x,c;
     unsigned long long code[4]={0};
-    int j=O;
+    int j=0;
     int l;
-    n=0;
     if (f != NULL)
     {
-       
-        
-        for (i=0; i<Nmax; i++) {
-            copie(getCode(i), code, 4);
-            l = tab[i].longueur;
+        while ((c=getc(f)) !=EOF) {
+            c&=255;
+            getCode(code,c);
+            l = tab[c].longueur;
             x=256-l;
             while(x>64){
                 x=x-6;
@@ -106,7 +102,7 @@ void ecrire_code(char * nom)
             x=64-x;
             while(j != 4){
                 while (x != 0){
-                    putc((code[j]>>(x-1)) & 255);
+                    putc((code[j]>>(x-1)) & 255 ,f1);
                     x--;
            
                 }
@@ -114,13 +110,9 @@ void ecrire_code(char * nom)
                 j++;
                         
             }
-            
-           
-             
-            }
-            
         }
-    
+        fclose(f);
+    }
     else{
          printf("Impossible d'ouvrir le fichier ");
         
@@ -129,12 +121,15 @@ void ecrire_code(char * nom)
     
 }
 
-void copie(unsigned long long *tbis, unsigned long long *tbis2, long tmaxbis)
+void getCode(unsigned long long code[],int indice)
 {
-int ibis;
-for (ibis=0;ibis<tmaxbis;ibis++)
-tbis2[ibis]=tbis[ibis];
+    int i;
+    for(i=0;i<4;i++)
+    {
+        code[i] = tab[indice].codage[i];
+    }
 }
+
 void compression()
 {
 }
@@ -165,11 +160,12 @@ void affiche(int*tab)
  **********************/
 
 void test_gestion_fichier(){
-     int * tab1;
+     int tab1[Nmax];
     int i,j;
+    Arbre * a;
     
     //test du parcours de fichier 
-    tab1 = parcours_fichier("test1.txt");
+    parcours_fichier("test1.txt",tab1);
     printf("\n");
     //affichage des répétitions des caractères ascii
     for(i=0;i<256;i++)
@@ -187,6 +183,12 @@ void test_gestion_fichier(){
         }
         
     }
+    a = creer_arbre_huffman(tab1);
+    affiche_feuille_arbre(a);
+    remplir_tab_longueur(a);
+    //affiche_longueur();
+    ecrire_en_tete("fichier_compress.txt");
+    ecrire_code("test1.txt","fichier_compress.txt");
     
 }
 

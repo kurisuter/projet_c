@@ -76,11 +76,12 @@ liste_chainee * tab_to_list(int tab_repetition[])
     Arbre * a;
     for(i=0;i<256;i++)
     {
-        if(tab_repetition[i] !=0)$
+        if(tab_repetition[i] !=0)
         {
-            a = ajouter_nouveau_parent(NULL,NULL,0,tab_repetition[i]);
-            printf("proba = %d ",a->proba );
+           //printf("\n on ajoute %c = %d", i, tab_repetition[i]);
+            a = ajouter_nouveau_parent(NULL,NULL,i,tab_repetition[i]);
             liste =ajouterElement(liste,a);
+            
 	}
     }
     return liste;
@@ -116,19 +117,16 @@ Arbre * creer_arbre_huffman(int tab_repetition[])
     int taille_fichier = somme_element(tab_repetition);
     
     liste = tab_to_list(tab_repetition);
-    
+    afficher(liste);
     while(liste->arbre->proba != taille_fichier)
     {
-        afficher(liste);
         a1 = recherche_mini(liste);
         liste = supprimerElement(liste, a1);
         a2 = recherche_mini(liste);
         liste = supprimerElement(liste, a2);
-        afficher(liste);
         a = ajouter_nouveau_parent(a1,a2,0,((a1->proba) +(a2->proba)));
-        printf("proba : a1 %d  a2 %d  a %d \n",a1->proba,a2->proba,a->proba);
+        //printf("proba : a1 %d  a2 %d  a %d \n",a1->proba,a2->proba,a->proba);
         liste= ajouterElement(liste, a);
-        afficher(liste);
     }
     
     return liste->arbre;
@@ -136,10 +134,9 @@ Arbre * creer_arbre_huffman(int tab_repetition[])
 
 void remplir_tab_longueur(Arbre * a)
 {
-    int i;
     longueur(a,0);
-    a = creerArbreCannonique();
-    recupererCode(Arbre *ac, tab_longueur *tl);
+    a = creerArbreCanonique();
+    recupererCode(a);
 }
 
 void arbre_decompression()
@@ -155,7 +152,7 @@ void afficher(liste_chainee * liste)
         {
 		if(temp->arbre !=NULL)
                 {
-			printf(" %d ", temp->arbre->proba);
+			printf(" %c : %d \n",temp->arbre->symbole ,temp->arbre->proba);
 		}
                 else
                 {

@@ -32,7 +32,7 @@ liste_chainee * tab_to_list(int tab_repetition[]);
 void copier_tab(int tab1[],int tab2[]);
 //créé l'arbre de huffman à partir du tableau de répétition
 Arbre * creer_arbre_huffman(int tab_repetition[]);
-
+void remplir_tab_longueur(Arbre * a);
 void afficher(liste_chainee * liste);
 //test du module huffman
 void test_huffman();

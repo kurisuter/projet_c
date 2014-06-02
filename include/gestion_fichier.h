@@ -14,10 +14,10 @@ void decompression(  );
 
 
 /* parcours du fichier en remplissant la table de frequence (table d'entier)*/
-int * parcours_fichier(char *nom);
+void parcours_fichier(char *nom, int t[]);
 
 /*Initilsation a 0 du tableau de frequence*/
-int *initialisation();
+void initialisation(int t[]);
 
 /*Affichage du tableau */
 void affiche(int* tab);
@@ -29,6 +29,8 @@ void ecrire_en_tete(char* nom_avec);
 /**********************
  * fonctions diverses *
  **********************/
+
+void getCode(unsigned long long code[],int indice);
 
 /*fonction de test du module */
 void test_gestion_fichier();

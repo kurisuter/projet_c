@@ -11,7 +11,7 @@ typedef struct Arbres
 	Arbre * fils_gauche;
 	Arbre * fils_droit;
 	int symbole;
-	float proba;
+	int proba;
 }Arbre;
 
 /***************************** 

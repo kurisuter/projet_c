@@ -32,6 +32,6 @@ void incrementer_longueur(int indice);
 listInt getSymbole(int lg);
 
 int get_lg_Max();
+void affiche_longeur();
 
-unsigned long long int getCode(int i);
 #endif

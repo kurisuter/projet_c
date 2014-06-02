@@ -68,7 +68,22 @@ int get_lg_Max()
     return n;
 }
 
-unsigned long long int getCode(int i)
+void affiche_longueur()
 {
-    return tab[i].codage;
+    int i,j;
+    for(i=0;i<256;i++)
+    {
+        printf("%c  ",i);
+        if((i%40)==0)
+        {
+            printf(".\n");
+            
+        for(j=i-39;j<i;j++){
+            printf("%d  ",tab[j].longueur);
+            
+        }
+            printf("\n\n");
+        }
+        
+    }
 }

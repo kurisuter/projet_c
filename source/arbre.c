@@ -36,6 +36,7 @@ Arbre * ajouter_nouveau_parent(Arbre * fg,Arbre * fd, int symbole, float proba)
 	p->fils_droit = fd;
 	p->symbole = symbole;
 	p->proba = proba;
+        //printf("\n on ajoute %c , %d", p->symbole,p->proba);
 	return p; 
 }
 
@@ -74,8 +75,7 @@ void affiche_arbre(Arbre * a)
         {
 		affiche_arbre(a->fils_gauche);
 	}
-	affiche_bin_octet(a->symbole);
-	printf(" %f \n ",a->proba);
+	printf("%c  %d \n ",a->symbole,a->proba);
 	if(a->fils_droit != NULL)
         {
 		affiche_arbre(a->fils_droit);
@@ -86,19 +86,21 @@ void affiche_arbre(Arbre * a)
 //affichage infixedes feuilles de l'arbre
 void affiche_feuille_arbre(Arbre * a)
 {
-    if(a->fils_gauche != NULL)
+    if(a!=NULL)
+    {
+        if(est_feuille(a))
         {
-		affiche_arbre(a->fils_gauche);
-	}
-	affiche_bin_octet(a->symbole);
-	if(est_feuille(a))
-        {
-            printf("%c %f \n ",a->symbole,a->proba);
+            printf("%c %d \n ",a->symbole,a->proba);
         }
-	if(a->fils_droit != NULL)
+        else
         {
-		affiche_arbre(a->fils_droit);
-	}
+                affiche_feuille_arbre(a->fils_gauche);
+		affiche_feuille_arbre(a->fils_droit);
+        }
+    }
+    
+    
+   // affiche_bin_octet(a->symbole);
 }
 
 //affiche un octet de l'entier x en binaire
@@ -119,8 +121,14 @@ void affiche_bin_octet(int x)
 /*fonction qui remplis le champs "longeur" de la structure de tab_longeur à partir d'un arbre et de la hauteur du noeud (0 au commencement, utile que pour le recursif)*/
 void longueur(Arbre * a, int h)
 {
-    if (est_feuille(a))
+    if(a ==NULL)
     {
+        printf("WHAT THE FUCK ");
+    }
+    if (est_feuille(a) == 1)
+    {
+        
+        printf("\n longueur = %d \n", h);
         ajouter_longueur(h,a->symbole);
     }
     else
