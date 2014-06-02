@@ -8,15 +8,7 @@
 
 int main()
 {
-    int * tab1;
-    int t[256];
-    int i;
-    tab1 = parcours_fichier("test1.txt");
-    for(i=0;i<256;i++)
-    {
-        t[i]=tab1[i];
-    }
-    printf("\n ICI OK \n");
-    test_PM(t);
+    test_gestion_fichier("test1.txt");
+   
     return 0;
 }

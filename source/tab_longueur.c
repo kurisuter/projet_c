@@ -80,7 +80,7 @@ void affiche_longueur()
             
         for(j=i-39;j<i;j++){
             printf("%d  ",tab[j].longueur);
-            
+        
         }
             printf("\n\n");
         }

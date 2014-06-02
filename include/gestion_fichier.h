@@ -9,7 +9,8 @@
 
 
 
-void compression(  );
+/*algo : 0=rien, 1=huff, 2=PM; perA et preTable : 0=rien, 1=rle, 2=mtf, 3=rle+mtf, 4=mtf+rle*/
+char * compression(char * nom, int algo, int preA, int preTable );
 void decompression(  );
 
 

@@ -7,6 +7,7 @@
 
 #ifndef RLE_H
 #define	RLE_H
+#include "arbre.h"
 
 FILE * rle(FILE * f);
 void test_rle(char * nom);

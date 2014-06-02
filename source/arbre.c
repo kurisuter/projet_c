@@ -71,16 +71,12 @@ int est_feuille(Arbre * a)
 //affichage infixe
 void affiche_arbre(Arbre * a)
 {
-	if(a->fils_gauche != NULL)
-        {
-		affiche_arbre(a->fils_gauche);
-	}
-	printf("%c  %d \n ",a->symbole,a->proba);
-	if(a->fils_droit != NULL)
-        {
-		affiche_arbre(a->fils_droit);
-	}
-	
+	if(a!=NULL)
+    {
+        printf("%c %d \n ",a->symbole,a->proba);
+        affiche_arbre(a->fils_gauche);
+        affiche_arbre(a->fils_droit);
+    }
 }
 
 //affichage infixedes feuilles de l'arbre
@@ -121,14 +117,9 @@ void affiche_bin_octet(int x)
 /*fonction qui remplis le champs "longeur" de la structure de tab_longeur à partir d'un arbre et de la hauteur du noeud (0 au commencement, utile que pour le recursif)*/
 void longueur(Arbre * a, int h)
 {
-    if(a ==NULL)
-    {
-        printf("WHAT THE FUCK ");
-    }
     if (est_feuille(a) == 1)
     {
         
-        printf("\n longueur = %d \n", h);
         ajouter_longueur(h,a->symbole);
     }
     else
@@ -235,6 +226,7 @@ Arbre * creerArbreCanonique()
             elems=elems->nxt;
             numElem++;
         }
+        h++;
     }
     return ac;
 }
