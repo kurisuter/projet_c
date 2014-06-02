@@ -130,7 +130,11 @@ void getCode(unsigned long long code[],int indice)
     }
 }
 
-void compression()
+void compression_huffman()
+{
+}
+
+void compression_package_merge()
 {
 }
 /*************
