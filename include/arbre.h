@@ -53,6 +53,9 @@ int est_feuille(Arbre * a);
 //affichage infixe
 void affiche_arbre(Arbre * a);
 
+//affichage infixedes feuilles de l'arbre
+void affiche_feuille_arbre(Arbre * a);
+
 //affiche un octet de l'entier x en binaire
 void affiche_bin_octet(int x);
 

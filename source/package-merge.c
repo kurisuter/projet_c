@@ -132,8 +132,10 @@ Arbre *creer_arbrePM(int tab_rep[])
     
 }
 
-void test_PM()
+void test_PM(int tab_rep[])
 {
     Arbre * a;
-    
+    a =creer_arbrePM(tab_rep);
+    printf("ICI OK");
+    affiche_feuille_arbre(a);
 }

@@ -83,6 +83,24 @@ void affiche_arbre(Arbre * a)
 	
 }
 
+//affichage infixedes feuilles de l'arbre
+void affiche_feuille_arbre(Arbre * a)
+{
+    if(a->fils_gauche != NULL)
+        {
+		affiche_arbre(a->fils_gauche);
+	}
+	affiche_bin_octet(a->symbole);
+	if(est_feuille(a))
+        {
+            printf("%c %f \n ",a->symbole,a->proba);
+        }
+	if(a->fils_droit != NULL)
+        {
+		affiche_arbre(a->fils_droit);
+	}
+}
+
 //affiche un octet de l'entier x en binaire
 void affiche_bin_octet(int x)
 {

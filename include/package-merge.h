@@ -27,6 +27,7 @@ int creer_list_from_tab(int tab_rep[], llist l);
 int package(llist elem, llist groupement);
 void merge(llist elem, llist groupement);
 Arbre * creer_arbrePM(int tab_repetition[]);
+void test_PM(int tab_rep[]);
 
 
 #endif	/* PACKAGE_MERGE_H */

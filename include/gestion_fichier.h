@@ -31,6 +31,6 @@ void ecrire_en_tete(char* nom_avec);
  **********************/
 
 /*fonction de test du module */
-void test();
+void test_gestion_fichier();
 
 #endif
