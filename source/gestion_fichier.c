@@ -86,34 +86,54 @@ void ecrire_code(char * nom)
 {
     FILE * f;
     f =fopen(nom, "a+");
-    int i,n;
-    int code[4]={0};
-    int a;
+    int i,x;
+    unsigned long long code[4]={0};
+    int j=O;
+    int l;
     n=0;
     if (f != NULL)
     {
-        int j=3;
+       
+        
         for (i=0; i<Nmax; i++) {
-            //code=getCode(i) ; // GETCODE A FAIRE
-            while(n!=0)
-            {
-                a=code[j]; 
-                j--;
-                while((n>=8) || (code[j]<8)){
-                    code[j]= a & 255;
-                    a=a>>8;
+            copie(getCode(i), code, 4);
+            l = tab[i].longueur;
+            x=256-l;
+            while(x>64){
+                x=x-6;
+                j++;
+            }
+            x=64-x;
+            while(j != 4){
+                while (x != 0){
+                    putc((code[j]>>(x-1)) & 255);
+                    x--;
+           
                 }
+                x=64;
+                j++;
+                        
+            }
+            
+           
              
             }
             
         }
-    }
+    
     else{
          printf("Impossible d'ouvrir le fichier ");
         
     }
 
     
+}
+
+void copie(unsigned long long *tbis, unsigned long long *tbis2, long tmaxbis)
+{
+int ibis;
+for (ibis=0;ibis<tmaxbis;ibis++)
+tbis2[ibis]=tbis[ibis];
 }
 void compression()
 {
@@ -169,5 +189,7 @@ void test_gestion_fichier(){
     }
     
 }
+
+
 
 
